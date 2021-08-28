@@ -1,0 +1,17 @@
+﻿@page "/"
+
+<div class="text-center">
+    <img src="logo.png" class="mx-auto d-block" alt="Lonestar Range & Academy" /> <br/><br/>
+
+    @if (DateTime.Now.DayOfWeek == DayOfWeek.Monday)
+    {
+        <p class="text-danger">Closed on Mondays</p>
+    } else
+    {
+        <p class="text-success">We are open today 9am to 5pm</p>
+    }
+
+    <p>10000 US-183 Florence, Texas 76527</p>
+    <p>(512) 516-7640</p>
+    <p><a href="mailto:lonestarrangeacademy@gmail.com">lonestarrangeacademy@gmail.com</a></p>
+</div>
