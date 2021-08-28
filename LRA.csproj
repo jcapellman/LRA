@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<!-- iOS, Android, MacCatalyst -->
+		<TargetFrameworks>net6.0-ios;net6.0-android;net6.0-maccatalyst</TargetFrameworks>
+		<OutputType>Exe</OutputType>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<RootNamespace>LRA</RootNamespace>
+
+		<!-- Display name -->
+		<ApplicationTitle>Lonestar Range and Academy</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.jarredcapellman.LRA</ApplicationId>
+
+		<!-- Versions -->
+		<ApplicationVersion>1.0</ApplicationVersion>
+		<AndroidVersionCode>1</AndroidVersionCode>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiImage Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" IsAppIcon="true" Color="#512BD4" />
+		<MauiImage Include="Resources\appiconfg.svg" />
+
+		<!-- Splash Screen -->
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\appiconfg.png" />
+	  <None Remove="Resources\appiconfg.svg" />
+	  <None Remove="Resources\appiconfig.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Pages\HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<PropertyGroup>
+		<InvariantGlobalization Condition="$(TargetFramework.Contains('-maccatalyst'))">true</InvariantGlobalization>
+		<RuntimeIdentifier Condition="$(TargetFramework.Contains('-ios'))">iossimulator-x64</RuntimeIdentifier>
+		<RuntimeIdentifier Condition="$(TargetFramework.Contains('-maccatalyst'))">maccatalyst-x64</RuntimeIdentifier>
+		<UseInterpreter Condition="$(TargetFramework.Contains('-android'))">False</UseInterpreter>
+		<TargetFramework>net6.0-android13.6</TargetFramework>
+	</PropertyGroup>
+
+</Project>
