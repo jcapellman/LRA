@@ -1,8 +1,17 @@
 ﻿@page "/Ranges"
 
 <h1>Ranges</h1>
+There are several ranges at Lonestar Range & Academy. Tap below to get information on distances and calibers allowed on each.
 
-<h2>Pistol Range</h2>
+<br/><br/>
+
+<button type="button" class="btn btn-primary" onclick="document.getElementById('pistol').scrollIntoView({behavior:'smooth'})">Pistol</button>
+<button type="button" class="btn btn-primary" onclick="document.getElementById('rifle').scrollIntoView({behavior:'smooth'})">Rifle</button>
+<button type="button" class="btn btn-primary" onclick="document.getElementById('shotgun').scrollIntoView({behavior:'smooth'})">Shotgun</button>
+
+<br/><br/>
+
+<h2 id="pistol">Pistol</h2>
 <img src="range_pistol.jpg" class="img-fluid rounded" alt="Pistol Range" /><br/>
 
 <p>
@@ -20,5 +29,26 @@ The pistol range offers a 3 yard, 7 yard and 15 yard range allowing pistols, rev
   <a href="#" class="list-group-item list-group-item-action">40 S&W</a>
   <a href="#" class="list-group-item list-group-item-action">45 ACP</a>
   <a href="#" class="list-group-item list-group-item-action">10mm</a>
+</div>
+</p>
+
+<h2 id="rifle">Rifle</h2>
+<img src="range_rifle.jpg" class="img-fluid rounded" alt="Rifle Range" /><br/>
+
+<p>
+The rifle range offers a 25 yard, 50/100 yard and two 100 yard bays.
+
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active">
+    Calibers Allowed
+  </a>
+
+  <a href="#" class="list-group-item list-group-item-action">22LR</a>
+  <a href="#" class="list-group-item list-group-item-action">.223</a>
+  <a href="#" class="list-group-item list-group-item-action">.30-06</a>
+  <a href="#" class="list-group-item list-group-item-action">5.56x45</a>
+  <a href="#" class="list-group-item list-group-item-action">6.5 Creedmoor</a>
+  <a href="#" class="list-group-item list-group-item-action">7.62x39</a>
+  <a href="#" class="list-group-item list-group-item-action">7.62x51/.308</a>
 </div>
 </p>
