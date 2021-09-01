@@ -10,6 +10,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0-preview.7.21378.6" PrivateAssets="all" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+  
   <ItemGroup>
     <Content Update="wwwroot\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
