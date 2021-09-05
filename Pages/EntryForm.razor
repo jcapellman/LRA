@@ -1,0 +1,15 @@
+﻿<h3>Entry Form</h3>
+
+<label>Name</label>
+<input @bind="Name" />
+
+<label>Email Address</label>
+<input @bind="EmailAddress" type="email" />
+
+<button type="submit">Submit</button>
+
+@code {
+	private string Name { get; set;}
+	
+	private string EmailAddress { get; set;}
+}
