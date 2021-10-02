@@ -1,5 +1,7 @@
 ﻿@page "/TrainingClasses"
 
+@inject NavigationManager NavigationManager
+
 <h1 id="home"><span class="oi oi-people" aria-hidden="true"></span>&nbsp;Training Classes</h1>
 The staff and instructors at Lonestar Range & Academy believe in every citizen's right to own firearms and are strong proponents in training.
 <br/><br/>
@@ -49,6 +51,12 @@ through criminal history background checks and monitors those currently licensed
 Registration is required and the balance due no later than the beginning of your class. We have 8 seats available per class.
 </p>
 
+<button type="button" class="btn btn-primary" @onclick='(() => RedirectToForm("License%20To%20Carry"))'>
+    Register for Class    
+</button>
+
+<br/><br/>
+
 <button type="button" onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})" class="btn btn-outline-danger">
    <span class="oi oi-arrow-top"></span>
    back to top
@@ -87,6 +95,12 @@ A certification is giving upon the completion of this course.<br /><br />
 
 Registration is required and the balance due no later than the beginning of your class. We have 8 seats available per class.
 </p>
+
+<button type="button" class="btn btn-primary" @onclick='(() => RedirectToForm("Basic%20Pistol"))'>
+    Register for Class    
+</button>
+
+<br/><br/>
 
 <button type="button" onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})" class="btn btn-outline-danger">
    <span class="oi oi-arrow-top"></span>
@@ -128,6 +142,12 @@ A certification is giving upon the completion of this course.<br /><br />
 Registration is required and the balance due no later than the beginning of your class. We have 8 seats available per class.
 </p>
 
+<button type="button" class="btn btn-primary" @onclick='(() => RedirectToForm("Advanced%20Pistol"))'>
+    Register for Class    
+</button>
+
+<br/><br/>
+
 <button type="button" onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})" class="btn btn-outline-danger">
    <span class="oi oi-arrow-top"></span>
    back to top
@@ -165,6 +185,12 @@ This course is 2-hours long and includes classroom and range time learning to dr
 Registration is required and the balance due no later than the beginning of your class. We have 8 seats available per class.
 </p>
 
+<button type="button" class="btn btn-primary" @onclick='(() => RedirectToForm("Drawing%20From%20Concealment"))'>
+    Register for Class    
+</button>
+
+<br/><br/>
+
 <button type="button" onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})" class="btn btn-outline-danger">
    <span class="oi oi-arrow-top"></span>
    back to top
@@ -197,6 +223,12 @@ This course is 2-hours long and includes classroom time learning how to dis-asse
 <p>
 Registration is required and the balance due no later than the beginning of your class. We have 8 seats available per class.
 </p>
+
+<button type="button" class="btn btn-primary" @onclick='(() => RedirectToForm("Handgun%20Maintenance"))'>
+    Register for Class    
+</button>
+
+<br/><br/>
 
 <button type="button" onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})" class="btn btn-outline-danger">
    <span class="oi oi-arrow-top"></span>
@@ -235,6 +267,12 @@ shooting from the bench rest, prone, sitting, standing and kneeling positions; c
 Registration is required and the balance due no later than the beginning of your class. We have 8 seats available per class.
 </p>
 
+<button type="button" class="btn btn-primary" @onclick='(() => RedirectToForm("Basic%20Rifle"))'>
+    Register for Class    
+</button>
+
+<br/><br/>
+
 <button type="button" onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})" class="btn btn-outline-danger">
    <span class="oi oi-arrow-top"></span>
    back to top
@@ -272,6 +310,12 @@ shotgun shell components; shooting fundamentals; range rules; cleaning; and cont
 Registration is required and the balance due no later than the beginning of your class. We have 8 seats available per class.
 </p>
 
+<button type="button" class="btn btn-primary" @onclick='(() => RedirectToForm("Basic%20Shotgun"))'>
+    Register for Class    
+</button>
+
+<br/><br/>
+
 <button type="button" onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})" class="btn btn-outline-danger">
    <span class="oi oi-arrow-top"></span>
    back to top
@@ -308,9 +352,22 @@ Covers everything from Basic shooting skills to Advance Scenario based skills de
 Registration is required and the balance due no later than the beginning of your class. We have 8 seats available per class.
 </p>
 
+<button type="button" class="btn btn-primary" @onclick='(() => RedirectToForm("Private%20Instruction"))'>
+    Register for Class    
+</button>
+
+<br/><br/>
+
 <button type="button" onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})" class="btn btn-outline-danger">
    <span class="oi oi-arrow-top"></span>
    back to top
 </button>
 
 <br/><br/>
+
+@code {
+    void RedirectToForm(string courseType)
+    {
+        NavigationManager.NavigateTo($"form/{courseType}");
+    }
+}

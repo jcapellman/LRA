@@ -1,15 +1,57 @@
-﻿<h3>Entry Form</h3>
+﻿@page "/form/{coursetype}"
 
-<label>Name</label>
-<input @bind="Name" />
+@using LRA.Models
+@inject LRA.Services.MailService mService
 
-<label>Email Address</label>
-<input @bind="EmailAddress" type="email" />
+<h3>Registration for @courseType</h3>
 
-<button type="submit">Submit</button>
+@if (submitted)
+{
+    <p>Thank you, your course registration has been received. Lookout for a follow up in the next 24-48 business hours.</p>
+} else {
+    <EditForm Model="model" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <p>
+            <label>
+                Name<br/>
+                <InputText @bind-Value="model.Name" />
+            </label>
+
+            <br/>
+
+            <label>
+                Email Address<br>
+                <InputText @bind-Value="model.EmailAddress" />
+            </label>
+        </p>
+
+	    <button type="submit" class="btn btn-primary">Submit</button>
+    </EditForm>
+}
 
 @code {
-	private string Name { get; set;}
-	
-	private string EmailAddress { get; set;}
+    private RegistrationModel model = new();
+
+    private bool submitted;
+
+    [Parameter]
+	public string courseType { get; set; }
+
+	protected override void OnInitialized()
+    {
+        submitted = false;
+        model.CourseType = courseType;
+	}
+
+    private async void HandleValidSubmit()
+    {
+        var result = await mService.SendEntryForm(model.Name, model.EmailAddress, model.CourseType);
+
+        if (result)
+        {
+            submitted = true;
+        }
+    }
 }
