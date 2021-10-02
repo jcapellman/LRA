@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System;
+using System.IO;
+using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 
@@ -23,9 +25,18 @@ namespace LRA.Services
 
         public MailService()
         {
-            _mailConfig = new MailSettings();
+            var settingsFile = Path.Combine(AppContext.BaseDirectory, "settings.json");
 
+            var json = File.ReadAllText(settingsFile);
 
+            var result = System.Text.Json.JsonSerializer.Deserialize<MailSettings>(json);
+
+            if (result == null)
+            {
+                throw new Exception("Failed to load settings");
+            }
+
+            _mailConfig = result;
         }
 
         public async Task<bool> SendEntryForm(string name, string emailAddress, string courseType)

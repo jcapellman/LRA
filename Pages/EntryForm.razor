@@ -10,9 +10,6 @@
     <p>Thank you, your course registration has been received. Lookout for a follow up in the next 24-48 business hours.</p>
 } else {
     <EditForm Model="model" OnValidSubmit="HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-
         <p>
             <label>
                 Name<br/>
@@ -47,11 +44,15 @@
 
     private async void HandleValidSubmit()
     {
+        submitted = true;
+
         var result = await mService.SendEntryForm(model.Name, model.EmailAddress, model.CourseType);
 
-        if (result)
+        if (!result)
         {
-            submitted = true;
+            // TODO Handle Error
         }
+
+        StateHasChanged();
     }
 }
