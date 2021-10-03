@@ -8,6 +8,8 @@ namespace LRA.Services
 {
     public class MailService
     {
+        private const string FILENAME_SETTINGS = "settings.json";
+
         public class MailSettings
         {
             public string Username { get; set; }
@@ -21,11 +23,18 @@ namespace LRA.Services
             public string Host { get; set; }
         }
 
-        private readonly MailSettings _mailConfig;
+        private readonly MailSettings _mailConfig = new();
+
+        private readonly bool _initialized = false;
 
         public MailService()
         {
-            var settingsFile = Path.Combine(AppContext.BaseDirectory, "settings.json");
+            var settingsFile = Path.Combine(AppContext.BaseDirectory, FILENAME_SETTINGS);
+
+            if (!File.Exists(settingsFile))
+            {
+                return;
+            }
 
             var json = File.ReadAllText(settingsFile);
 
@@ -33,14 +42,21 @@ namespace LRA.Services
 
             if (result == null)
             {
-                throw new Exception("Failed to load settings");
+                return;
             }
 
             _mailConfig = result;
+
+            _initialized = true;
         }
 
         public async Task<bool> SendEntryForm(string name, string emailAddress, string courseType)
         {
+            if (!_initialized)
+            {
+                return false;
+            }
+
             var formEntry = $"Name: {name}<br/>" + $"Email Address: {emailAddress}<br/>" + $"Course: {courseType}";
 
             return await SendEmailAsync(_mailConfig.FromEmail, "New Course Registration", formEntry);
@@ -48,7 +64,7 @@ namespace LRA.Services
 
         private async Task<bool> SendEmailAsync(string ToEmail, string Subject, string HTMLBody)
         {
-            MailMessage message = new MailMessage();
+            MailMessage message = new();
             SmtpClient smtp = new();
 
             message.From = new MailAddress(_mailConfig.FromEmail);

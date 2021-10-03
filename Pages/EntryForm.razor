@@ -1,14 +1,21 @@
 ﻿@page "/form/{coursetype}"
 
+@using LRA.Enums
 @using LRA.Models
 @inject LRA.Services.MailService mService
 
 <h3>Registration for @courseType</h3>
 
-@if (submitted)
+@if (status == FormSubmissionStatus.Submitted)
 {
     <p>Thank you, your course registration has been received. Lookout for a follow up in the next 24-48 business hours.</p>
-} else {
+} else if (status == FormSubmissionStatus.Submitting)
+{
+    <p>Submitting Form...</p>
+} else if (status == FormSubmissionStatus.Error)
+{
+    <p class="alert-danger">Sorry there was an error submitting your registration, please try again later.</p>
+} else if (status == FormSubmissionStatus.Pending) {
     <EditForm Model="model" OnValidSubmit="HandleValidSubmit">
         <p>
             <label>
@@ -31,26 +38,29 @@
 @code {
     private RegistrationModel model = new();
 
-    private bool submitted;
+    private FormSubmissionStatus status;
 
     [Parameter]
 	public string courseType { get; set; }
 
 	protected override void OnInitialized()
     {
-        submitted = false;
+        status = FormSubmissionStatus.Pending;
         model.CourseType = courseType;
 	}
 
     private async void HandleValidSubmit()
     {
-        submitted = true;
+        status = FormSubmissionStatus.Submitting;
 
         var result = await mService.SendEntryForm(model.Name, model.EmailAddress, model.CourseType);
 
         if (!result)
         {
-            // TODO Handle Error
+            status = FormSubmissionStatus.Error;
+        } else
+        {
+            status = FormSubmissionStatus.Submitted;
         }
 
         StateHasChanged();
