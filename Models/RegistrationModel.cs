@@ -10,6 +10,9 @@ namespace LRA.Models
         [Required]
         public string EmailAddress { get; set; }
 
+        [Required]
+        public string PhoneNumber { get; set; }
+
         public string CourseType { get; set; }
     }
 }

@@ -50,14 +50,14 @@ namespace LRA.Services
             _initialized = true;
         }
 
-        public async Task<bool> SendEntryForm(string name, string emailAddress, string courseType)
+        public async Task<bool> SendEntryForm(string name, string emailAddress, string courseType, string phoneNumber)
         {
             if (!_initialized)
             {
                 return false;
             }
 
-            var formEntry = $"Name: {name}<br/>" + $"Email Address: {emailAddress}<br/>" + $"Course: {courseType}";
+            var formEntry = $"Name: {name}<br/>" + $"Email Address: {emailAddress}<br/>" + $"Phone Number: {phoneNumber}<br/>" + $"Course: {courseType}";
 
             return await SendEmailAsync(_mailConfig.FromEmail, "New Course Registration", formEntry);
         }

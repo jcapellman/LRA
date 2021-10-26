@@ -29,6 +29,11 @@
                 Email Address<br>
                 <InputText @bind-Value="model.EmailAddress" />
             </label>
+
+            <label>
+                Phone Number<br>
+                <InputText @bind-Value="model.PhoneNumber" />
+            </label>
         </p>
 
 	    <button type="submit" class="btn btn-primary">Submit</button>
@@ -53,7 +58,7 @@
     {
         status = FormSubmissionStatus.Submitting;
 
-        var result = await mService.SendEntryForm(model.Name, model.EmailAddress, model.CourseType);
+        var result = await mService.SendEntryForm(model.Name, model.EmailAddress, model.CourseType, model.PhoneNumber);
 
         if (!result)
         {
