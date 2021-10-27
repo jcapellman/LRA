@@ -13,6 +13,8 @@ namespace LRA.Models
         [Required]
         public string PhoneNumber { get; set; }
 
+        public string PreferredMethod { get; set; }
+
         public string CourseType { get; set; }
     }
 }

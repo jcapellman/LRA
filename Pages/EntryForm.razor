@@ -34,6 +34,15 @@
                 Phone Number<br>
                 <InputText @bind-Value="model.PhoneNumber" />
             </label>
+
+            <label>
+                Preferred Contact Method<br>
+                <InputSelect @bind-Value="model.PreferredMethod">
+                    <option selected>Email</option>
+                    <option>Phone Call</option>
+                    <option>Text Message</option>
+                </InputSelect>
+            </label>
         </p>
 
 	    <button type="submit" class="btn btn-primary">Submit</button>
@@ -58,7 +67,7 @@
     {
         status = FormSubmissionStatus.Submitting;
 
-        var result = await mService.SendEntryForm(model.Name, model.EmailAddress, model.CourseType, model.PhoneNumber);
+        var result = await mService.SendEntryForm(model.Name, model.EmailAddress, model.CourseType, model.PhoneNumber, model.PreferredMethod);
 
         if (!result)
         {
